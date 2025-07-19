@@ -1,0 +1,51 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "lib": ["es2020", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "paths": {
+      "@passiontech-nestjs-template/zma-config": ["libs/zma-config/src/index.ts"],
+      "@passiontech-nestjs-template/zma-decorators": ["libs/zma-decorators/src/index.ts"],
+      "@passiontech-nestjs-template/zma-grpc/user": ["libs/zma-grpc/src/interface/user.service.ts"],
+      "@passiontech-nestjs-template/zma-i18n": ["libs/zma-i18n/src/index.ts"],
+      "@passiontech-nestjs-template/zma-middlewares": ["libs/zma-middlewares/src/index.ts"],
+      "@passiontech-nestjs-template/zma-repositories": ["libs/zma-repositories/src/index.ts"],
+      "@passiontech-nestjs-template/zma-types": ["libs/zma-types/src/index.ts"],
+      "@passiontech-nestjs-template/zma-types/inputs/storage": [
+        "libs/zma-types/src/inputs/storage/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-types/inputs/user": [
+        "libs/zma-types/src/inputs/user/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-types/mappers/storage": [
+        "libs/zma-types/src/mappers/storage/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-types/mappers/user": [
+        "libs/zma-types/src/mappers/user/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-types/models/user": [
+        "libs/zma-types/src/models/user/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-types/outputs/storage": [
+        "libs/zma-types/src/outputs/storage/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-types/outputs/user": [
+        "libs/zma-types/src/outputs/user/index.ts"
+      ],
+      "@passiontech-nestjs-template/zma-utils": ["libs/zma-utils/src/index.ts"]
+    },
+    "rootDir": ".",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2015",
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules", "tmp"]
+}

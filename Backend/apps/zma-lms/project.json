@@ -1,0 +1,55 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "zma-lms",
+  "projectType": "application",
+  "sourceRoot": "apps/zma-lms/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "args": ["node-env=development"]
+        }
+      },
+      "executor": "nx:run-commands",
+      "options": {
+        "args": ["node-env=production"],
+        "command": "webpack-cli build",
+        "assets": [
+          {
+            "input": "apps/zma-lms",
+            "glob": "**/(*.yaml|yml)",
+            "output": "."
+          },
+          {
+            "input": "libs/zma-i18n/src/i18n",
+            "glob": "**/*",
+            "output": "./i18n"
+          }
+        ]
+      }
+    },
+    "serve": {
+      "configurations": {
+        "development": {
+          "buildTarget": "zma-lms:build:development"
+        },
+        "production": {
+          "buildTarget": "zma-lms:build:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "zma-lms:build",
+        "runBuildTargetDependencies": false
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}

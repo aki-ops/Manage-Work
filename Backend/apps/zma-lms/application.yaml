@@ -1,0 +1,5 @@
+database:
+  mongo:
+    uri: mongodb://${host}
+nats:
+  uri: ${hosts}
