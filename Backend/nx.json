@@ -32,7 +32,11 @@
       "plugin": "@nx/eslint/plugin"
     },
     {
-      "exclude": ["apps/zma-sample-e2e/**/*"],
+      "exclude": [
+        "apps/zma-sample-e2e/**/*",
+        "customer-fake-e2e/**/*",
+        "apps/customer-fake-e2e/**/*"
+      ],
       "options": {
         "targetName": "test"
       },

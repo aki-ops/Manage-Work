@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""Company"""
+type Company {
+  description: String
+  id: String!
+  name: String!
+  totalEmployees: Float!
+}
+
+input CompanyInput {
+  address: String
+  description: String!
+  locations: [String!]
+  logoUrl: String
+  lunchBreak: String
+  name: String
+  totalEmployees: Float!
+  websiteUrl: String
+  workingHour: String
+}
+
+type Mutation {
+  createCompany(input: CompanyInput!): Boolean!
+  createUser(input: UserInput!): Boolean!
+  deleteCompanies(ids: [String!]!): Boolean!
+  deleteUsers(ids: [String!]!): Boolean!
+  updateCompany(id: String!, input: CompanyInput!): Boolean!
+  updateUser(id: String!, input: UserInput!): Boolean!
+}
+
+input Pagination {
+  limit: Int = 10
+  skip: Int = 0
+}
+
+type Query {
+  allCompanies(pagination: Pagination!): [Company!]!
+  allUsers(pagination: Pagination!): [User!]!
+  companies(ids: [String!]!): [Company!]!
+  company(id: String!): Company!
+  privacyPolicy: String!
+  searchCompanies(input: String!, pagination: Pagination!): [Company!]!
+  searchUsers(input: String!, pagination: Pagination!): [User!]!
+  termAndCondition: String!
+  user(id: String!): User!
+  users(ids: [String!]!): [User!]!
+}
+
+"""User"""
+type User {
+  id: String!
+  password: String!
+  role: String!
+  username: String!
+}
+
+input UserInput {
+  name: String
+  password: String
+  role: String
+  username: String
+}

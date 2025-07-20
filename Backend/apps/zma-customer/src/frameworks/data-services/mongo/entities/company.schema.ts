@@ -19,26 +19,11 @@ export class CompanyEntity {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
-  logoUrl?: string;
-
-  @Prop()
-  websiteUrl?: string;
-
-  @Prop()
-  address?: string;
-
-  @Prop()
-  workingHour?: string;
-
-  @Prop()
-  lunchBreak?: string;
-
-  @Prop({ default: [] })
-  locations: string[];
-
   @Prop()
   description?: string;
+
+  @Prop()
+  tenantId?: string;
 
   @Prop({ default: 0 })
   totalEmployees?: number;
