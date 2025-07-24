@@ -3,10 +3,6 @@ import { IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UserInput {
-  @IsString()
-  @IsOptional()
-  @Field({ nullable: true })
-  name: string;
 
   @IsString()
   @IsOptional()

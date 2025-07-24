@@ -21,15 +21,14 @@ export class TaskMutation {
     @Args('input', { type: () => TaskInput }) input: TaskInput,
     @Args('id') id: string,
   ): Promise<boolean> {
-    return this.useCase.updateTask({ input , id });
+    return this.useCase.updateTask({ input, id });
   }
 
   @Mutation(() => Boolean)
   async removeTask(
-    @Args('id') ids: string[],
-    @Args('projectId') projectId: string,
+    @Args('ids', { type: () => [String] }) ids: string[],
+    @Args('projectId', { type: () => String }) projectId: string,
   ): Promise<boolean> {
     return this.useCase.deleteTasks(ids, projectId);
   }
-
 }

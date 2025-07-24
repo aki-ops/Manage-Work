@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { DataServicesModule } from '../../services/data-services/data-services.module';
 
 import { UserFactoryService } from './user-factory.user-case.service';
 import { UserUseCase } from './user.use-case';
+
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import { UserUseCase } from './user.use-case';
         inject: [ConfigService],
       },
     ]),
+    JwtModule
   ],
   providers: [UserFactoryService, UserUseCase],
   exports: [UserFactoryService, UserUseCase],

@@ -25,8 +25,8 @@ export class MemberMutation {
 
   @Mutation(() => Boolean)
   async removeMember(
-    @Args('id') ids: string[],
-    @Args('projectId') projectId: string,
+    @Args('ids', { type: () => [String] }) ids: string[],
+    @Args('projectId', { type: () => String }) projectId: string,
   ): Promise<boolean> {
     return this.useCase.deleteMembers(ids, projectId);
   }

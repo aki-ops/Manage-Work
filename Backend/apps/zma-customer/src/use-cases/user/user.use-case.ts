@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { ClientProxy } from '@nestjs/microservices';
 import { Exception } from '@passiontech-nestjs-template/zma-middlewares';
 import { Pagination } from '@passiontech-nestjs-template/zma-types';
@@ -8,7 +9,9 @@ import { IDataServices } from '../../core/abstracts';
 import { UserInput } from '../../core/inputs';
 import { User } from '../../core/models';
 
+
 import { UserFactoryService } from './user-factory.user-case.service';
+
 
 @Injectable()
 export class UserUseCase {
@@ -16,6 +19,7 @@ export class UserUseCase {
     @Inject('TEST_SERVICE') private client: ClientProxy,
     private dataServices: IDataServices,
     private factoryService: UserFactoryService,
+    private readonly JwtService : JwtService
   ) {}
 
   async testMicroservice(): Promise<string> {
@@ -28,6 +32,20 @@ export class UserUseCase {
     );
 
     return response;
+  }
+
+  async Login( input : UserInput  ): Promise< string >{
+    const tenantId = 'your_tenant_id_here';
+
+    const existingUser = await this.dataServices.userService.findOne({
+      tenantId,
+      find: { filter: { username: input.username, password: input.password, isDeleted: false } },
+    });
+
+    if(!existingUser) throw new UnauthorizedException();
+    
+    const payload = {sub : existingUser.username, role : existingUser.role}
+    return await this.JwtService.signAsync(payload);
   }
 
   async getUser(id: string): Promise<User> {
@@ -115,7 +133,7 @@ export class UserUseCase {
 
     const existingUser = await this.dataServices.userService.findOne({
       tenantId,
-      find: { filter: { name: newUser.name, isDeleted: false } },
+      find: { filter: { username: newUser.username, isDeleted: false } },
     });
 
     if (existingUser) {
@@ -136,25 +154,25 @@ export class UserUseCase {
     id: string;
   }): Promise<boolean> {
     const tenantId = 'your_tenant_id_here';
-    const existingCompany = await this.dataServices.companyService.findById({ tenantId, id });
+    const existingUser = await this.dataServices.userService.findById({ tenantId, id });
 
-    if (!existingCompany) {
+    if (!existingUser) {
       throw new Exception(`Company with id ${id} not found`);
     }
-    const updatedCompany = {
+    const updatedUser = {
       ...input,
     };
-    const entity = await this.dataServices.companyService.updateOne({
+    const entity = await this.dataServices.userService.updateOne({
       tenantId,
       id,
-      update: { item: updatedCompany },
+      update: { item: updatedUser },
     });
     return !!entity;
   }
 
   async deleteUsers(ids: string[]): Promise<boolean> {
     const tenantId = 'your_tenant_id_here';
-    const { modifiedCount } = await this.dataServices.companyService.updateMany({
+    const { modifiedCount } = await this.dataServices.userService.updateMany({
       tenantId,
       filter: { _id: { $in: ids } },
       item: { isDeleted: true },

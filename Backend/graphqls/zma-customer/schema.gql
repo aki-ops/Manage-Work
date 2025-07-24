@@ -37,6 +37,7 @@ type Query {
   allUsers(pagination: Pagination!): [User!]!
   companies(ids: [String!]!): [Company!]!
   company(id: String!): Company!
+  login(input: UserInput!): String!
   privacyPolicy: String!
   searchCompanies(input: String!, pagination: Pagination!): [Company!]!
   searchUsers(input: String!, pagination: Pagination!): [User!]!
@@ -54,7 +55,6 @@ type User {
 }
 
 input UserInput {
-  name: String
   password: String
   role: String
   username: String

@@ -1,3 +1,3 @@
-export * from './company.resolver';
-export * from './master-data.resolver';
-export * from './user.resolver';
+export * from './member.resolver';
+export * from './project.resolver';
+export * from './task.resolver';

@@ -1,16 +1,25 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Pagination } from '@passiontech-nestjs-template/zma-types';
 
+import { UserInput } from '../../core/inputs';
 import { User } from '../../core/models';
 import { UserUseCase } from '../../use-cases/user/user.use-case';
 
+
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private useCase: UserUseCase) {}
+  constructor(
+    private useCase: UserUseCase
+  ) {}
 
   @Query(() => User)
   async user(@Args('id') id: string): Promise<User> {
     return this.useCase.getUser(id);
+  }
+
+  @Query(() => String)
+  async login(@Args('input') input : UserInput): Promise<string>{
+    return this.useCase.Login(input);
   }
 
   @Query(() => [User])

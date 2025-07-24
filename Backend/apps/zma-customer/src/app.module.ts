@@ -80,7 +80,6 @@ cache.invalidate([]);
         process.env.NODE_ENV === 'development'
           ? join(process.cwd(), 'graphqls/zma-customer/schema.gql')
           : true,
-      graphiql : true,
       transformSchema: (schema) => upperDirectiveTransformer(schema, 'upper'),
       sortSchema: true,
       buildSchemaOptions: {
@@ -91,6 +90,7 @@ cache.invalidate([]);
           }),
         ],
       },
+      graphiql: true,
       healthCheckEndpoint: '/health',
       cors: {},
       plugins: [
@@ -123,9 +123,9 @@ cache.invalidate([]);
     HealthModule,
     DataServicesModule,
     CompanyUseCaseModule,
-    MasterDataUseCaseModule,
     UserUseCaseModule,
-    ZmaI18nModule,
+    MasterDataUseCaseModule,
+    ZmaI18nModule
   ],
   controllers: [],
   providers: [

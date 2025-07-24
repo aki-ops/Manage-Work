@@ -1,0 +1,92 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input MemberInput {
+  memberId: String!
+  projectId: String!
+  role: [ProjectRole!]
+}
+
+type Mutation {
+  createMember(input: MemberInput!): Boolean!
+  createProject(input: ProjectInput!): Boolean!
+  createTask(input: TaskInput!): Boolean!
+  deleteProjects(ids: [String!]!): Boolean!
+  removeMember(ids: [String!]!, projectId: String!): Boolean!
+  removeTask(ids: [String!]!, projectId: String!): Boolean!
+  updateProject(id: String!, input: ProjectInput!): Boolean!
+  updateRole(input: MemberInput!): Boolean!
+  updateTask(id: String!, input: TaskInput!): Boolean!
+}
+
+input Pagination {
+  limit: Int = 10
+  skip: Int = 0
+}
+
+enum PriovityEnum {
+  High
+  Low
+  Medium
+}
+
+"""Project"""
+type Project {
+  createdAt: DateTime!
+  description: String!
+  id: String!
+  name: String!
+  ownerId: String!
+}
+
+input ProjectInput {
+  description: String
+  name: String
+  ownerId: String!
+}
+
+enum ProjectRole {
+  Admin
+  Editor
+  Viewer
+}
+
+type Query {
+  allProjects(pagination: Pagination!): [Project!]!
+  getMembersId(ProjectId: String!): [String!]!
+  getProjects(memberId: String!, pagination: Pagination!): [Project!]!
+  getTask(ProjectId: String!, taskId: String!): Task!
+  getTasks(ids: [String!]!, pagination: Pagination!, projectId: String!): [Task!]!
+  project(id: String!): Project!
+  projects(ids: [String!]!): [Project!]!
+  searchProjects(input: String!, pagination: Pagination!): [Project!]!
+}
+
+"""Task"""
+type Task {
+  assigneeId: String!
+  description: String!
+  id: String!
+  name: String!
+  priority: PriovityEnum!
+  projectId: String!
+  status: String!
+}
+
+input TaskInput {
+  assigneeId: String!
+  createdAt: DateTime!
+  description: String
+  name: String!
+  priority: PriovityEnum!
+  projectId: String!
+  status: String!
+}

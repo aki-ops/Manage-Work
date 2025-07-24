@@ -3,13 +3,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { IDataServices } from '../../../core';
 
-import { CompanyEntity, CompanySchema, UserEntity, UserSchema } from './entities';
+import { TaskEntity, TaskSchema, ProjectEntity, ProjectSchema, MemberProjectEntity, MemberProjectSchema  } from './entities';
 import { MongoDataServices } from './mongo-data-services.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: CompanyEntity.name, schema: CompanySchema }]),
-    MongooseModule.forFeature([{ name: UserEntity.name, schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: ProjectEntity.name, schema: ProjectSchema }]),
+    MongooseModule.forFeature([{ name: TaskEntity.name, schema: TaskSchema }]),
+    MongooseModule.forFeature([{ name: MemberProjectEntity.name, schema: MemberProjectSchema }]),
   ],
   providers: [
     {
